@@ -10,7 +10,7 @@
             padding: 0;
             box-sizing: border-box;
         }
-        
+
         body {
             min-height: 100vh;
             display: flex;
@@ -21,9 +21,10 @@
             padding: 20px;
             position: relative;
             overflow: hidden;
+            --bg-image: url('gfc26-poster.jpg');
         }
-        
-        /* Blurred background image - changes with slides */
+
+        /* Blurred background image */
         body::before {
             content: '';
             position: absolute;
@@ -31,7 +32,7 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background-image: url('gfc26-poster.jpg');
+            background-image: var(--bg-image);
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
@@ -39,9 +40,9 @@
             transform: scale(1.1);
             opacity: 0.3;
             z-index: 0;
-            transition: background-image 0.5s ease-in-out;
+            transition: background-image 0.8s ease-in-out;
         }
-        
+
         /* Dark overlay */
         body::after {
             content: '';
@@ -53,7 +54,7 @@
             background: linear-gradient(135deg, rgba(0,0,0,0.7) 0%, rgba(20,20,20,0.8) 100%);
             z-index: 1;
         }
-        
+
         .container {
             max-width: 900px;
             width: 100%;
@@ -61,7 +62,7 @@
             position: relative;
             z-index: 2;
         }
-        
+
         .slideshow-wrapper {
             background: rgba(0, 0, 0, 0.5);
             border-radius: 20px;
@@ -73,64 +74,64 @@
             position: relative;
             overflow: hidden;
         }
-        
+
         .slideshow-container {
             position: relative;
             width: 100%;
             touch-action: pan-y;
         }
-        
+
         .slide {
             display: none;
             width: 100%;
             animation: slideIn 0.5s ease-in-out;
         }
-        
+
         .slide.active {
             display: block;
         }
-        
+
         .slide img {
             width: 100%;
-            height: auto;
+            height: 100%;
             border-radius: 15px;
             display: block;
             box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
+            object-fit: contain; /* Ensures full image fits without zoom */
+            background-color: #000; /* Adds padding background if aspect ratio differs */
+            max-height: 80vh;
         }
-        
+
         /* Navigation arrows */
         .prev, .next {
             cursor: pointer;
             position: absolute;
             top: 50%;
-            width: auto;
-            margin-top: -22px;
+            transform: translateY(-50%);
             padding: 16px;
             color: white;
             font-weight: bold;
             font-size: 24px;
             transition: 0.3s ease;
-            border-radius: 0 5px 5px 0;
+            border-radius: 5px;
             user-select: none;
             background-color: rgba(0, 0, 0, 0.5);
             z-index: 10;
         }
-        
-        .next {
-            right: 0;
-            border-radius: 5px 0 0 5px;
-        }
-        
+
+        .prev { left: 10px; }
+        .next { right: 10px; }
+
         .prev:hover, .next:hover {
             background-color: rgba(255, 68, 68, 0.8);
         }
-        
+
         /* Dots indicator */
         .dots-container {
             text-align: center;
             padding: 15px 0 5px 0;
         }
-        
+
         .dot {
             cursor: pointer;
             height: 12px;
@@ -141,11 +142,11 @@
             display: inline-block;
             transition: background-color 0.3s ease;
         }
-        
+
         .dot.active, .dot:hover {
             background-color: #ff4444;
         }
-        
+
         .footer {
             margin-top: 30px;
             color: #fff;
@@ -153,55 +154,33 @@
             opacity: 0.9;
             text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
         }
-        
+
         .footer a {
             color: #ff4444;
             text-decoration: none;
             font-weight: bold;
         }
-        
+
         .footer a:hover {
             text-decoration: underline;
             color: #ff6666;
         }
-        
+
         @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
-        
+
         @keyframes slideIn {
-            from {
-                opacity: 0;
-            }
-            to {
-                opacity: 1;
-            }
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
-        
+
         @media (max-width: 768px) {
-            .slideshow-wrapper {
-                padding: 15px;
-            }
-            
-            .footer {
-                font-size: 12px;
-            }
-            
-            body::before {
-                filter: blur(30px);
-            }
-            
-            .prev, .next {
-                padding: 12px;
-                font-size: 18px;
-            }
+            .slideshow-wrapper { padding: 15px; }
+            .footer { font-size: 12px; }
+            body::before { filter: blur(30px); }
+            .prev, .next { padding: 12px; font-size: 18px; }
         }
     </style>
 </head>
@@ -209,35 +188,19 @@
     <div class="container">
         <div class="slideshow-wrapper">
             <div class="slideshow-container" id="slideshow">
-                <div class="slide active">
-                    <img src="gfc26-poster.jpg" alt="GFC26 - Golden Futsal Challenge 2026">
-                </div>
-                <div class="slide">
-                    <img src="kit1.jpeg" alt="Kit 1">
-                </div>
-                <div class="slide">
-                    <img src="kit2.jpeg" alt="Kit 2">
-                </div>
-                <div class="slide">
-                    <img src="kit3.jpeg" alt="Kit 3">
-                </div>
-                <div class="slide">
-                    <img src="kit4.jpeg" alt="Kit 4">
-                </div>
-                <div class="slide">
-                    <img src="kit5.jpeg" alt="Kit 5">
-                </div>
-                <div class="slide">
-                    <img src="kit6.jpeg" alt="Kit 6">
-                </div>
-                <div class="slide">
-                    <img src="kit7.jpeg" alt="Kit 7">
-                </div>
-                
+                <div class="slide active"><img src="gfc26-poster.jpg" alt="GFC26 - Golden Futsal Challenge 2026"></div>
+                <div class="slide"><img src="kit1.jpeg" alt="Kit 1"></div>
+                <div class="slide"><img src="kit2.jpeg" alt="Kit 2"></div>
+                <div class="slide"><img src="kit3.jpeg" alt="Kit 3"></div>
+                <div class="slide"><img src="kit4.jpeg" alt="Kit 4"></div>
+                <div class="slide"><img src="kit5.jpeg" alt="Kit 5"></div>
+                <div class="slide"><img src="kit6.jpeg" alt="Kit 6"></div>
+                <div class="slide"><img src="kit7.jpeg" alt="Kit 7"></div>
+
                 <a class="prev" onclick="changeSlide(-1)">❮</a>
                 <a class="next" onclick="changeSlide(1)">❯</a>
             </div>
-            
+
             <div class="dots-container">
                 <span class="dot active" onclick="currentSlide(0)"></span>
                 <span class="dot" onclick="currentSlide(1)"></span>
@@ -249,7 +212,7 @@
                 <span class="dot" onclick="currentSlide(7)"></span>
             </div>
         </div>
-        
+
         <div class="footer">
             <p>CLUB NOLHIVARAM | For More Info Call: <a href="tel:7582223">7582223</a></p>
         </div>
@@ -258,123 +221,73 @@
     <script>
         let currentIndex = 0;
         let autoSlideInterval;
-        let touchStartX = 0;
-        let touchEndX = 0;
-        
+        let touchStartX = 0, touchEndX = 0;
+
         const slides = document.querySelectorAll('.slide');
         const dots = document.querySelectorAll('.dot');
         const slideshow = document.getElementById('slideshow');
-        const images = ['gfc26-poster.jpg', 'kit1.jpeg', 'kit2.jpeg', 'kit3.jpeg', 'kit4.jpeg', 'kit5.jpeg', 'kit6.jpeg', 'kit7.jpeg'];
-        
+        const images = ['gfc26-poster.jpg','kit1.jpeg','kit2.jpeg','kit3.jpeg','kit4.jpeg','kit5.jpeg','kit6.jpeg','kit7.jpeg'];
+
         function showSlide(index) {
-            // Loop around
-            if (index >= slides.length) {
-                currentIndex = 0;
-            } else if (index < 0) {
-                currentIndex = slides.length - 1;
-            } else {
-                currentIndex = index;
-            }
-            
-            // Hide all slides
-            slides.forEach(slide => slide.classList.remove('active'));
-            dots.forEach(dot => dot.classList.remove('active'));
-            
-            // Show current slide
+            if (index >= slides.length) currentIndex = 0;
+            else if (index < 0) currentIndex = slides.length - 1;
+            else currentIndex = index;
+
+            slides.forEach(s => s.classList.remove('active'));
+            dots.forEach(d => d.classList.remove('active'));
+
             slides[currentIndex].classList.add('active');
             dots[currentIndex].classList.add('active');
-            
+
             // Update blurred background
-            updateBackground(currentIndex);
+            document.body.style.setProperty('--bg-image', `url('${images[currentIndex]}')`);
         }
-        
-        function updateBackground(index) {
-            document.body.style.setProperty('--bg-image', `url('${images[index]}')`);
-            const beforeElement = document.querySelector('body::before');
-            document.body.style.backgroundImage = `url('${images[index]}')`;
-        }
-        
+
         function changeSlide(direction) {
             showSlide(currentIndex + direction);
             resetAutoSlide();
         }
-        
+
         function currentSlide(index) {
             showSlide(index);
             resetAutoSlide();
         }
-        
+
         function autoSlide() {
             showSlide(currentIndex + 1);
         }
-        
+
         function resetAutoSlide() {
             clearInterval(autoSlideInterval);
-            autoSlideInterval = setInterval(autoSlide, 10000);
+            autoSlideInterval = setInterval(autoSlide, 8000);
         }
-        
-        // Touch/Swipe support
-        slideshow.addEventListener('touchstart', (e) => {
-            touchStartX = e.changedTouches[0].screenX;
-        });
-        
-        slideshow.addEventListener('touchend', (e) => {
+
+        // Swipe (touch)
+        slideshow.addEventListener('touchstart', e => touchStartX = e.changedTouches[0].screenX);
+        slideshow.addEventListener('touchend', e => {
             touchEndX = e.changedTouches[0].screenX;
-            handleSwipe();
+            if (touchEndX < touchStartX - 50) changeSlide(1);
+            if (touchEndX > touchStartX + 50) changeSlide(-1);
         });
-        
-        function handleSwipe() {
-            if (touchEndX < touchStartX - 50) {
-                // Swipe left
-                changeSlide(1);
-            }
-            if (touchEndX > touchStartX + 50) {
-                // Swipe right
-                changeSlide(-1);
-            }
-        }
-        
-        // Mouse drag support for desktop
-        let isDragging = false;
-        let startX = 0;
-        
-        slideshow.addEventListener('mousedown', (e) => {
-            isDragging = true;
-            startX = e.clientX;
-        });
-        
-        slideshow.addEventListener('mousemove', (e) => {
-            if (!isDragging) return;
-        });
-        
-        slideshow.addEventListener('mouseup', (e) => {
+
+        // Mouse drag (desktop)
+        let isDragging = false, startX = 0;
+        slideshow.addEventListener('mousedown', e => { isDragging = true; startX = e.clientX; });
+        slideshow.addEventListener('mouseup', e => {
             if (!isDragging) return;
             isDragging = false;
             const endX = e.clientX;
-            if (endX < startX - 50) {
-                changeSlide(1);
-            }
-            if (endX > startX + 50) {
-                changeSlide(-1);
-            }
+            if (endX < startX - 50) changeSlide(1);
+            if (endX > startX + 50) changeSlide(-1);
         });
-        
-        slideshow.addEventListener('mouseleave', () => {
-            isDragging = false;
-        });
-        
-        // Start auto-slide
-        autoSlideInterval = setInterval(autoSlide, 3000);
-        
+        slideshow.addEventListener('mouseleave', () => isDragging = false);
+
+        // Auto slide start
+        autoSlideInterval = setInterval(autoSlide, 8000);
+
         // Pause on hover
-        slideshow.addEventListener('mouseenter', () => {
-            clearInterval(autoSlideInterval);
-        });
-        
-        slideshow.addEventListener('mouseleave', () => {
-            resetAutoSlide();
-        });
+        slideshow.addEventListener('mouseenter', () => clearInterval(autoSlideInterval));
+        slideshow.addEventListener('mouseleave', () => resetAutoSlide());
     </script>
 </body>
 </html>
-
