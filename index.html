@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nolhivaram Club - GFC26</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 900px;
+            width: 100%;
+            text-align: center;
+        }
+        
+        .image-wrapper {
+            background: #000;
+            border-radius: 20px;
+            padding: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            animation: fadeIn 1s ease-in;
+        }
+        
+        img {
+            width: 100%;
+            height: auto;
+            border-radius: 15px;
+            display: block;
+        }
+        
+        .footer {
+            margin-top: 30px;
+            color: #fff;
+            font-size: 14px;
+            opacity: 0.8;
+        }
+        
+        .footer a {
+            color: #ff4444;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        
+        .footer a:hover {
+            text-decoration: underline;
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .image-wrapper {
+                padding: 15px;
+            }
+            
+            .footer {
+                font-size: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="image-wrapper">
+            <!-- Replace 'gfc26-poster.jpg' with your actual image filename -->
+            <img src="gfc26-poster.jpg" alt="We Are Back - GFC26 - Golden Futsal Challenge 2026">
+        </div>
+        
+        <div class="footer">
+            <p>CLUB NOLHIVARAM | <a href="https://nolhivaram.club">For More info Call :7362223 </a></p>
+        </div>
+    </div>
+</body>
+
+</html>
+
